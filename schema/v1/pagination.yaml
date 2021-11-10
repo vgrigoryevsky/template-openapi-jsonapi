@@ -1,0 +1,43 @@
+pagination-meta:
+  type: object
+  properties:
+    total:
+      type: integer
+      minimum: 0
+      example: 200
+    from:
+      type: integer
+      minimum: 0
+      example: 1
+    to:
+      type: integer
+      minimum: 0
+      example: 20
+    path:
+      type: string
+      example: /api/some/path?pageSize=20&sortField=createdAt&sortDirection=desc&page=1
+    currentPage:
+      type: integer
+      example: 1
+    lastPage:
+      type: integer
+      example: 10
+    pageSize:
+      type: integer
+      minimum: 0
+      example: 20
+pagination-links:
+  type: object
+  properties:
+    next:
+      type: string
+      example: /api/some/path?pageSize=20&sortField=createdAt&sortDirection=desc&page=3
+    prev:
+      type: string
+      example: /api/some/path?pageSize=20&sortField=createdAt&sortDirection=desc&page=1
+    first:
+      type: string
+      example: /api/some/path?pageSize=20&sortField=createdAt&sortDirection=desc&page=1
+    last:
+      type: string
+      example: /api/some/path?pageSize=20&sortField=createdAt&sortDirection=desc&page=5

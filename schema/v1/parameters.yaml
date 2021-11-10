@@ -1,0 +1,108 @@
+# Header Parameters
+
+Accept:
+  name: Accept
+  in: header
+  description: "Default accept header"
+  required: false
+  schema:
+    type: string
+  example: "application/json"
+
+# Query Parameters
+
+PaginationPageQueryParameter:
+  name: page
+  in: query
+  description: "Desired page number (defaults to 1)"
+  required: false
+  schema:
+    type: integer
+    minimum: 1
+    default: 1
+    example: 1
+
+PaginationPageSizeQueryParameter:
+  name: pageSize
+  in: query
+  description: "Desired number of elements per page (defaults to 20)"
+  required: false
+  schema:
+    type: integer
+    minimum: 1
+    maximum: 50
+    default: 20
+    example: 20
+
+ObjectNameQueryParameter:
+  name: user_name
+  in: query
+  description: User name to search by.
+  required: false
+  schema:
+    $ref: 'object.yaml#/ObjectName'
+
+ObjectSortByQueryParameter:
+  name: sort_by
+  in: query
+  description: Sort objects by ...
+  required: false
+  schema:
+    type: string
+    enum: [ "createdAt", "modifiedAt" ]
+    example: "createdAt"
+    default: "createdAt"
+
+SearchTermQueryParameter:
+  name: search_term
+  in: query
+  description: Search term to filter by. At least 3 characters. Searches in objects' content.
+  required: false
+  schema:
+    type: string
+    example: "hello world"
+
+ObjectIdQueryParameter:
+  name: object_id
+  in: query
+  description: '`objectId` to filter by.'
+  required: false
+  schema:
+    $ref: 'object.yaml#/ObjectId'
+
+SortOrderQueryParameter:
+  name: sort_order
+  in: query
+  description: 'Determines the sort order (ascending or descending)'
+  required: false
+  schema:
+    type: string
+    enum: [ "asc", "desc" ]
+    example: "desc"
+    default: "desc"
+
+# Path Parameters
+
+ObjectIdPathParameter:
+  name: object-id
+  in: path
+  description: Object identifier
+  required: true
+  schema:
+    $ref: 'object.yaml#/ObjectId'
+
+# Model Shared Parameters
+
+ResourceId:
+  type: string
+  example: a1
+
+CreatedAt:
+  type: string
+  format: date-time
+  example: 2020-05-05T08:20:58+0000
+
+ModiifedAt:
+  type: string
+  format: date-time
+  example: 2020-06-05T08:20:58+0000
