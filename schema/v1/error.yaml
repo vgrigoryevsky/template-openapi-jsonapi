@@ -1,0 +1,106 @@
+ErrorObjects:
+  type: object
+  properties:
+    errors:
+      type: array
+      items:
+        oneOf:
+          - $ref: '#/Error400'
+          - $ref: '#/Error401'
+          - $ref: '#/Error403'
+          - $ref: '#/Error404'
+          - $ref: '#/Error409'
+          - $ref: '#/Error422'
+          - $ref: '#/Error429'
+      maxItems: 1
+
+BasicErrorObject:
+  type: object
+  properties:
+    id:
+      $ref: './parameters.yaml#/ResourceId'
+    status:
+      type: integer
+      description: The HTTP status code applicable to this problem, expressed as a string value.
+    code:
+      type: integer
+      description: An application-specific error code, expressed as a string value.
+    title:
+      type: string
+      description: A short, human-readable summary of the problem.
+    detail:
+      type: string
+      description: A human-readable explanation specific to this occurrence of the problem.
+    source:
+      type: string
+      description: An object containing references to the source of the error.
+
+Error400:
+  allOf:
+    - $ref: '#/BasicErrorObject'
+    - type: object
+      properties:
+        status:
+          example: 400
+        title:
+          example: Bad request
+
+Error401:
+  allOf:
+    - $ref: '#/BasicErrorObject'
+    - type: object
+      properties:
+        status:
+          example: 401
+        title:
+          example: Unauthorized
+
+Error403:
+  allOf:
+    - $ref: '#/BasicErrorObject'
+    - type: object
+      properties:
+        status:
+          example: 403
+        title:
+          example: Forbidden
+
+Error404:
+  allOf:
+    - $ref: '#/BasicErrorObject'
+    - type: object
+      properties:
+        status:
+          example: 404
+        title:
+          example: Not Found
+
+Error409:
+  allOf:
+    - $ref: '#/BasicErrorObject'
+    - type: object
+      properties:
+        status:
+          example: 409
+        title:
+          example: Conflict
+
+Error422:
+  allOf:
+    - $ref: '#/BasicErrorObject'
+    - type: object
+      properties:
+        status:
+          example: 422
+        title:
+          example: Unprocessable entity
+
+Error429:
+  allOf:
+    - $ref: '#/BasicErrorObject'
+    - type: object
+      properties:
+        status:
+          example: 429
+        title:
+          example: Too many requests

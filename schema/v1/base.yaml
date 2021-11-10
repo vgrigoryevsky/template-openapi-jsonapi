@@ -1,0 +1,86 @@
+# Models
+
+BaseIdentifierObject:
+  type: object
+  properties:
+    type:
+      type: string
+      enum:
+        - base-object
+      nullable: false
+      example: base-object
+    id:
+      $ref: './parameters.yaml#/ResourceId'
+  required:
+    - type
+    - id
+
+BaseObjectAttributes:
+  type: object
+  properties:
+    name:
+      type: string
+      description: "Object name."
+      nullable: false
+    title:
+      type: string
+      description: "Object title."
+      nullable: true
+    description:
+      type: string
+      description: "Object description."
+      nullable: true
+  required:
+    - name
+
+BaseObjectRelationships:
+  type: object
+
+BaseObject:
+  allOf:
+    - $ref: '#/BaseIdentifierObject'
+    - type: object
+      properties:
+        attributes:
+          $ref: '#/BaseObjectAttributes'
+        relationships:
+          $ref: '#/BaseObjectRelationships'
+      required:
+        - attributes
+        - relationships
+
+
+# Base Bodies
+
+BaseObjectBody:
+  type: object
+  properties:
+    included:
+      schema:
+        type: array
+
+# Request Bodies
+
+
+# Response Bodies
+
+BaseObjectResponseBody:
+  type: object
+  properties:
+    links:
+      type: object
+#    included:
+#      schema:
+#        type: array
+
+BaseObjectListResponseBody:
+  type: object
+  properties:
+    meta:
+      $ref: 'pagination.yaml#/pagination-meta'
+    links:
+      $ref: 'pagination.yaml#/pagination-links'
+#    included:
+#      schema:
+#        type: array
+#        items:

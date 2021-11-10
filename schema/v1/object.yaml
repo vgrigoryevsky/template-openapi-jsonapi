@@ -1,0 +1,89 @@
+# Models
+
+ObjectId:
+  $ref: './parameters.yaml#/ResourceId'
+
+ObjectIdentifierObject:
+  allOf:
+    - $ref: './base.yaml#/BaseIdentifierObject'
+    - type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - objects
+          example: 'objects'
+        id:
+          $ref: '#/ObjectId'
+
+ObjectAttributes:
+  type: object
+  properties:
+    name:
+      example: "template-object"
+    title:
+      example: "Template Object"
+    description:
+      example: "This is a Template Object description"
+
+ObjectRelationships:
+  type: object
+  properties:
+    parentObject:
+      type: object
+      properties:
+        data:
+          $ref: '#/ObjectIdentifierObject'
+    childObjects:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/ObjectIdentifierObject'
+          maxItems: 10
+
+Object:
+  allOf:
+    - $ref: '#/ObjectIdentifierObject'
+    - type: object
+      properties:
+        attributes:
+          $ref: '#/ObjectAttributes'
+        relationships:
+          $ref: '#/ObjectRelationships'
+
+# Generic Bodies
+
+ObjectBody:
+  type: object
+  properties:
+    data:
+      $ref: '#/Object'
+    included:
+      type: array
+      items:
+        anyOf:
+          - $ref: './object.yaml#/Object'
+      maxItems: 1000
+
+# Request Bodies
+
+
+# Response Bodies
+
+ObjectResponseBody:
+  allOf:
+    - $ref: '#/Object'
+    - $ref: './base.yaml#/BaseObjectResponseBody'
+
+ObjectListResponseBody:
+  allOf:
+    - $ref: './base.yaml#/BaseObjectListResponseBody'
+    - type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/Object'
+          maxItems: 100

@@ -1,0 +1,121 @@
+openapi: 3.0.3
+info:
+  title: Template RESTful API
+  version: 0.0.1
+servers:
+  - url: 'https://template.com'
+    description: Localhost
+security:
+  - JWT: [ ]
+tags:
+  - name: Objects
+    description: Objects APIs
+
+paths:
+
+  # Objects
+
+  /v1/objects:
+    $ref: 'api/v1/objects.yaml#/ObjectList'
+
+  /v1/objects/{object-id}:
+    $ref: 'api/v1/objects.yaml#/Object'
+
+components:
+
+  schemas:
+
+    # BASE OBJECTS
+    ResourceId:
+      $ref: 'schema/v1/parameters.yaml#/ResourceId'
+    BaseIdentifierObject:
+      $ref: 'schema/v1/base.yaml#/BaseIdentifierObject'
+    BaseObjectAttributes:
+      $ref: 'schema/v1/base.yaml#/BaseObjectAttributes'
+    BaseObjectRelationships:
+      $ref: 'schema/v1/base.yaml#/BaseObjectRelationships'
+    BaseObject:
+      $ref: 'schema/v1/base.yaml#/BaseObject'
+    BaseObjectResponseBody:
+      $ref: 'schema/v1/base.yaml#/BaseObjectResponseBody'
+    BaseObjectListResponseBody:
+      $ref: 'schema/v1/base.yaml#/BaseObjectListResponseBody'
+
+    # OBJECTS
+    ObjectId:
+      $ref: 'schema/v1/object.yaml#/ObjectId'
+    ObjectIdentifierObject:
+      $ref: 'schema/v1/object.yaml#/ObjectIdentifierObject'
+    ObjectAttributes:
+      $ref: 'schema/v1/object.yaml#/ObjectAttributes'
+    ObjectRelationships:
+      $ref: 'schema/v1/object.yaml#/ObjectRelationships'
+    Object:
+      $ref: 'schema/v1/object.yaml#/Object'
+    ObjectBody:
+      $ref: 'schema/v1/object.yaml#/ObjectBody'
+    ObjectResponseBody:
+      $ref: 'schema/v1/object.yaml#/ObjectResponseBody'
+    ObjectListResponseBody:
+      $ref: 'schema/v1/object.yaml#/ObjectListResponseBody'
+
+    # ERRORS
+    ErrorObjects:
+      $ref: 'schema/v1/error.yaml#/ErrorObjects'
+    BasicErrorObject:
+      $ref: 'schema/v1/error.yaml#/BasicErrorObject'
+
+    Error400:
+      $ref: 'schema/v1/error.yaml#/Error400'
+    Error401:
+      $ref: 'schema/v1/error.yaml#/Error401'
+    Error403:
+      $ref: 'schema/v1/error.yaml#/Error403'
+    Error404:
+      $ref: 'schema/v1/error.yaml#/Error404'
+    Error409:
+      $ref: 'schema/v1/error.yaml#/Error409'
+    Error422:
+      $ref: 'schema/v1/error.yaml#/Error422'
+    Error429:
+      $ref: 'schema/v1/error.yaml#/Error429'
+
+    # PROPERTIES
+
+    pagination-meta:
+      $ref: 'schema/v1/pagination.yaml#/pagination-meta'
+    pagination-links:
+      $ref: 'schema/v1/pagination.yaml#/pagination-links'
+
+  parameters:
+    Accept:
+      $ref: 'schema/v1/parameters.yaml#/Accept'
+    PaginationPageQueryParameter:
+      $ref: 'schema/v1/parameters.yaml#/PaginationPageQueryParameter'
+    PaginationPageSizeQueryParameter:
+      $ref: 'schema/v1/parameters.yaml#/PaginationPageSizeQueryParameter'
+    ObjectsSortByQueryParameter:
+      $ref: 'schema/v1/parameters.yaml#/ObjectSortByQueryParameter'
+    SearchTermQueryParameter:
+      $ref: 'schema/v1/parameters.yaml#/SearchTermQueryParameter'
+    ObjectIdQueryParameter:
+      $ref: 'schema/v1/parameters.yaml#/ObjectIdQueryParameter'
+
+    # Path Parameters
+
+    ObjectIdPathParameter:
+      $ref: 'schema/v1/parameters.yaml#/ObjectIdPathParameter'
+
+  securitySchemes:
+
+    JWT:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Access Token
+
+    JWTRefresh:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Refresh Token
